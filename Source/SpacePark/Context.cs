@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ namespace SpacePark
         string Randa;
         string Joakim;
         string Sofi;
-        
+
         public DbSet<Person> Person { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<ParkingHouse> ParkingHouses { get; set; }
@@ -22,8 +24,12 @@ namespace SpacePark
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Sandra);
-            
+            var builder = new ConfigurationBuilder();
+
+            builder.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            var defaultConnectionString = config.GetConnectionString("Default");
+            optionsBuilder.UseSqlServer(defaultConnectionString);
         }
     }
 }
