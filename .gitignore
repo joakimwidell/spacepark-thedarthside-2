@@ -351,4 +351,5 @@ MigrationBackup/
 
 # Ignore local appSettings
 appsettings.Local.json
-Source\SpacePark\appsettings.json
+Source/SpacePark/appsettings.json
+appsettings.json
