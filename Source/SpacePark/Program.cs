@@ -9,11 +9,12 @@ namespace SpacePark
         {
             Console.WriteLine("Hello World!!");
             var context = new Context();
-            var person = new Person {  FirstName = "Sandra", LastName = "hdjsa" };
-
+            var person = new Person {FirstName = "Katt", LastName = "Gris" };
             context.Add<Person>(person);
+            Console.WriteLine("tryck!!");
+            Console.ReadKey();
             context.SaveChanges();
-           
+
         }
     }
 }
