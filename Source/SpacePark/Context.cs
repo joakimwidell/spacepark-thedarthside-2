@@ -16,7 +16,7 @@ namespace SpacePark
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=LAPTOP-BG55CFP4\SQLEXPRESS;Initial Catalog=SpacePark;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-EU75VRC\SQLEXPRESS;Initial Catalog=SpacePark;Trusted_Connection=True");
         }
     }
 }
