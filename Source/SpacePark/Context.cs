@@ -12,10 +12,7 @@ namespace SpacePark
 {
     public class Context : DbContext
     {
-        //string Sandra = @"Server=LAPTOP-BG55CFP4\\SQLEXPRESS;Initial Catalog=SpacePark;Trusted_Connection=True";
-        //string Joakim;
-        //string Randa;
-        //string Sofie;
+       
        
         public DbSet<Person> Person { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
