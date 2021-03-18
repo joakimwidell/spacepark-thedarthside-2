@@ -20,8 +20,19 @@
 4. constraints på tillgänglighet
 5. kontrollera / manipulera data
 
+Att tänka på:
+
+Personen skall ej läggas till om i databasen om den inte är valid.
+Måste kolla om en person redan är i Databasen, då kan dom inte läggas till fören dom lämnat
+När dom lämnar parkeringen skall dom helt och hållet tas bort ifrån databasen, vill dom parkera igen skall dom läggas in i databasen på nytt. 
+
+Att dom är med i APIt(är kända), har fordon och att det finns en plats ledig, då läggs dom in i databasen.
+
+
+
 ### API
 1. Anropa
+   Först person ==> Fordon ==> kolla ledig parkering ==> lägg in i databasen
 2. Jämföra 
 Krav: Vi måste skicka request för varje ny besökare och det skall göras async
 
