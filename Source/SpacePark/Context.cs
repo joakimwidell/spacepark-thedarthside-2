@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SpacePark.Models;
+using static SpacePark.Person;
 
 namespace SpacePark
 {

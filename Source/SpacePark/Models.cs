@@ -7,6 +7,8 @@ namespace SpacePark
 {
     public partial class Models
     {
+       private Context context = new Context();
+
 
 
     }
