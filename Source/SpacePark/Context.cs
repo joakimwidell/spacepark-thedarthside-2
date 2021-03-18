@@ -13,6 +13,8 @@ namespace SpacePark
 
         public DbSet<Person> Person { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<ParkingHouse> ParkingHouses { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
