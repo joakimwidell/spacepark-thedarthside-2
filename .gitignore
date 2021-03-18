@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 
 # Ignore local appSettings
-appsettings.json
+appsettings.Local.json
