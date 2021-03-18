@@ -12,19 +12,22 @@ namespace SpacePark
 {
     public class Context : DbContext
     {
+        string Sandra = "";
+        string Joakim;
+        string Randa;
+        string Sofie;
+       
         public DbSet<Person> Person { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<ParkingHouse> ParkingHouses { get; set; }
+        public DbSet<Vehicle> Vehicle { get; set; }
+        public DbSet<ParkingHouse> ParkingHouse { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder();
 
-            builder.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-            var config = builder.Build();
-            var defaultConnectionString = config.GetConnectionString("Default");
-            optionsBuilder.UseSqlServer(defaultConnectionString);
+            optionsBuilder.UseSqlServer(Sandra);
+
+           
         }
     }
 }
