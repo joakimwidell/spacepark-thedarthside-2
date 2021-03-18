@@ -12,10 +12,10 @@ namespace SpacePark
 {
     public class Context : DbContext
     {
-        string Sandra = "";
-        string Joakim;
-        string Randa;
-        string Sofie;
+        //string Sandra = @"Server=LAPTOP-BG55CFP4\\SQLEXPRESS;Initial Catalog=SpacePark;Trusted_Connection=True";
+        //string Joakim;
+        //string Randa;
+        //string Sofie;
        
         public DbSet<Person> Person { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
@@ -25,9 +25,13 @@ namespace SpacePark
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer(Sandra);
+            var builder = new ConfigurationBuilder();
 
-           
+            builder.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            var defaultConnectionString = config.GetConnectionString("Default");
+            optionsBuilder.UseSqlServer(defaultConnectionString);
+
         }
     }
 }
