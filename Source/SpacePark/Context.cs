@@ -10,7 +10,11 @@ namespace SpacePark
 {
     public class Context : DbContext
     {
-
+        string Sandra = @"Server=LAPTOP-BG55CFP4\SQLEXPRESS;Initial Catalog=SpacePark;Trusted_Connection=True";
+        string Randa;
+        string Joakim;
+        string Sofi;
+        
         public DbSet<Person> Person { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<ParkingHouse> ParkingHouses { get; set; }
@@ -18,7 +22,8 @@ namespace SpacePark
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-EU75VRC\SQLEXPRESS;Initial Catalog=SpacePark;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer(Sandra);
+            
         }
     }
 }
