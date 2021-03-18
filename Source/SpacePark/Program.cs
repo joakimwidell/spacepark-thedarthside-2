@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Data.Entity;
+using static TestConnectionJW;
+using DbContext = System.Data.Entity.DbContext;
 
 namespace SpacePark
 {
@@ -10,4 +14,5 @@ namespace SpacePark
             Console.WriteLine("Hello again, world!");
         }
     }
+   
 }
