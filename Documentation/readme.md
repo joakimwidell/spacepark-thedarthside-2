@@ -30,6 +30,10 @@ Att dom är med i APIt(är kända), har fordon och att det finns en plats ledig,
 
 
 
+När man startar ska men kolla antal ledig platser och skriva om det finns och i så fall antal, samt om det inte finns
+
+
+
 ### API
 1. Anropa
    Först person ==> Fordon ==> kolla ledig parkering ==> lägg in i databasen
