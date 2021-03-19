@@ -16,7 +16,6 @@ namespace SpacePark
        
         public DbSet<Person> Person { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
-        public DbSet<ParkingHouse> ParkingHouse { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

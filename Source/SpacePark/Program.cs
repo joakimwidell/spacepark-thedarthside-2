@@ -17,10 +17,12 @@ namespace SpacePark
            var listOfPeople = await  p.GetListOfPeople();
             // lägga detta så att man kan välja vilken man vill ta bort när någon lämnar 
             //Parkeringen
+            int i = 0;
             foreach (var l in listOfPeople)
             {
-                Console.WriteLine($"{l.FirstName} {l.LastName}");
+                i++;
             }
+                Console.WriteLine($"{i} ");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
 
