@@ -15,6 +15,8 @@ namespace SpacePark
             var p = new PersonDataAccess(context);
             //await p.AddPersonAsync(new Person { FirstName = "Anton", LastName = "Johansson" });
            var listOfPeople = await  p.GetListOfPeople();
+            // lägga detta så att man kan välja vilken man vill ta bort när någon lämnar 
+            //Parkeringen
             foreach (var l in listOfPeople)
             {
                 Console.WriteLine($"{l.FirstName} {l.LastName}");
