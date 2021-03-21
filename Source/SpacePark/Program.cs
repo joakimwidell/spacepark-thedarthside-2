@@ -32,7 +32,7 @@ namespace SpacePark
             //var x = parking.CheckAvailableParking();
             //Console.WriteLine(x);
 
-            var test = new SwApi{ };
+            var test = new SwApi();
             //await test.GetStarWarsObject("/people/?search=Luke Skywalker");
             var findLuke = await test.GetSpaceTraveller("Luke Skywalker");
             
