@@ -33,12 +33,14 @@ namespace SpacePark
             //Console.WriteLine(x);
 
             var test = new SwApi{ };
-            test.GetStarWarsLegends("luke");
-            Console.WriteLine(test);
+            //await test.GetStarWarsObject("/people/?search=Luke Skywalker");
+            var findLuke = await test.GetSpaceTraveller("Luke Skywalker");
+            
+            
 
             Console.ReadKey();
 
-
+            Console.ReadLine();
         }
 
     }
