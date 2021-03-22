@@ -1,12 +1,13 @@
 ﻿using System;
 using static SpacePark.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SpacePark
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("Hello World!!");
             //var models = new Models();
