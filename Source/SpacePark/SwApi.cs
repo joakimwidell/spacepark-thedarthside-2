@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SpacePark
 {
-    public class SwApi : IDisposable
+    public class SwApi : Menu, IDisposable
     {
         public string Name { get; set; }
         private string NamePath { get; set; }
@@ -67,7 +67,7 @@ namespace SpacePark
                 // gör metod som skriver ut om person har starshipt och isf vilka
                 // lista 
                 // return name
-               var hej =  await IsPersonStarShipOwner(search.results[0]);
+                var hej = await IsPersonStarShipOwner(search.results[0]);
 
 
 
@@ -85,6 +85,8 @@ namespace SpacePark
         }
         public async Task<Starship> IsPersonStarShipOwner(SpaceTraveller person)
         {
+            var menu = new Menu();
+            List<string> starShips = new List<string>();
 
             foreach (var p in person.starships)
             {
@@ -93,13 +95,7 @@ namespace SpacePark
                 if (search.name.ToLower() != null)
                 {
                     Console.WriteLine(search.name);
-                    // gör metod som skriver ut om person har starshipt och isf vilka
-                    // lista 
-                    // return name
-
-                    //IsPersonStarchipOwner(search.results[0]);
-
-                    return search;
+                    starShips.Add(search.name);
 
                 }
                 else
@@ -108,15 +104,14 @@ namespace SpacePark
 
                 }
             }
+
+            // TODO Skicka in detta resultatet in i en metod som skapar upp person/Starship i datatbasen
+            var x = menu.ShowMenu("Choose Starship to park", starShips);
+            Console.WriteLine("");
+            Console.WriteLine($"You selected {starShips[x]}");
             return new Starship();
 
-            //if (search.results.Any())
-            //{
-
-
-
         }
-
 
         public void Dispose()
         {
