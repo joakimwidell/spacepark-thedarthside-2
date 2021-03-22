@@ -15,11 +15,16 @@ namespace SpacePark
             var person = context.Person.Where(x => x.Id == 5).FirstOrDefault();
             context.Remove(person);
 
+            var test = new SwApi();
+            //await test.GetStarWarsObject("/people/?search=Luke Skywalker");
+            var findLuke = await test.GetSpaceTraveller("katt");
+            
+            
 
             Console.ReadKey();
             context.SaveChanges();
 
-
+            Console.ReadLine();
         }
     }
 }

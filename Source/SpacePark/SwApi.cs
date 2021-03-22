@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,41 +10,33 @@ using System.Threading.Tasks;
 
 namespace SpacePark
 {
-    public class SwApi
+    public class SwApi : IDisposable
     {
         public string Name { get; set; }
-        //public SwApi(string name, string url)
-        //{
-        //    Name = name;
-        //}
-    
-    public async void GetStarWarsLegends(string name)
-    {
-        //Define your baseUrl
-        string baseUrl = $"https://swapi.dev/api/people/?search={name}/";
-        
-        try
-        {
-            //We will now define your HttpClient with your first using statement which will use a IDisposable.
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage res = await client.GetAsync(baseUrl))
+        public string NamePath { get; set; }
+        public string ShipName { get; set; }
+        public string ShipPath { get; set; }
+        HttpClient client = new HttpClient();
 
+        public async Task<T> GetStarWarsObject<T>(string path) // för att kunna göra massa olika anrop
+        {
+            //Define your baseUrl
+            string baseUrl = $"https://swapi.dev/api{path}"; //tog bort en slash
+            T result = default;
+            try
+            {
+                //We will now define your HttpClient with your first using statement which will use a IDisposable.
+               // using () // flera using kan läggas på varandra
+                using (HttpResponseMessage res = await client.GetAsync(baseUrl))
                 using (HttpContent content = res.Content)
                 {
                     //Retrieve the data from the content of the response, have the await keyword since it is asynchronous.
-                    string data = await content.ReadAsStringAsync();
-                    //If the data is not null, parse the data to a C# object, then create a new instance of PokeItem.
-                    if (data != null)
+                    var data = await content.ReadAsStringAsync();
+                    //If the data is not null, parse the data to a C# object
+                    if (content != null) //bytte från data till content
                     {
                         //Parse your data into a object.
-                        var dataObj = JObject.Parse(data);
-                        //Then create a new instance of PokeItem, and string interpolate your name property to your JSON object.
-                        //Which will convert it to a string, since each property value is a instance of JToken.
-                        
-                        //Person person = new Person(name: $"{dataObj["name"]}");
-                        //Log your pokeItem's name to the Console.
-                        Console.WriteLine("Person: {0}", dataObj);
+                        result = JsonConvert.DeserializeObject<T>(data);
                     }
                     else
                     {
@@ -52,10 +45,41 @@ namespace SpacePark
                     }
                 }
             }
-                //Catch any exceptions and log it into the console.
-            } catch(Exception exception) {
+            //Catch any exceptions and log it into the console.
+            catch (Exception exception)
+            {
                 Console.WriteLine(exception);
+            }
+
+            return result;
+        }
+
+        public async Task<SpaceTraveller> GetSpaceTraveller(string name)
+        {
+            NamePath = $"/people/?search={name}";
+            var search = await GetStarWarsObject<SearchResultTraveller>(NamePath);
+
+            if (search.results.Any())
+            {
+                if (search.results.Length > 1)
+                {
+                    throw new Exception("Du är en snålåkare");
+                }
+                else if (search.count < 1)
+                {
+                    throw new Exception("Du är inte en person");
+
+                }
+
+                return search.results[0];
+            }
+
+            return null;
+        }
+
+        public void Dispose()
+        {
+            client?.Dispose();
         }
     }
-}
 }
