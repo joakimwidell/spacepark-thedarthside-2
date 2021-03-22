@@ -65,6 +65,11 @@ namespace SpacePark
                 {
                     throw new Exception("Du är en snålåkare");
                 }
+                else if (search.count < 1)
+                {
+                    throw new Exception("Du är inte en person");
+
+                }
 
                 return search.results[0];
             }
