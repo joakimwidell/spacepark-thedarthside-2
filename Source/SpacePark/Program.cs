@@ -18,7 +18,7 @@ namespace SpacePark
 
             var test = new SwApi();
             //await test.GetStarWarsObject("/people/?search=Luke Skywalker");
-            var findLuke = await test.GetSpaceTraveller("katt");
+            var findLuke = await test.GetSpaceTraveller("Darth vader");
             
             
 

@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 namespace SpacePark
 {
     public class SwApi : IDisposable
     {
         public string Name { get; set; }
-        public string NamePath { get; set; }
+        private string NamePath { get; set; }
         public string ShipName { get; set; }
         public string ShipPath { get; set; }
         HttpClient client = new HttpClient();
@@ -21,22 +22,21 @@ namespace SpacePark
         public async Task<T> GetStarWarsObject<T>(string path) // för att kunna göra massa olika anrop
         {
             //Define your baseUrl
-            string baseUrl = $"https://swapi.dev/api{path}"; //tog bort en slash
+            string baseUrl = $"{path}"; //tog bort en slash
             T result = default;
             try
             {
-                //We will now define your HttpClient with your first using statement which will use a IDisposable.
-               // using () // flera using kan läggas på varandra
+                // using () // flera using kan läggas på varandra
                 using (HttpResponseMessage res = await client.GetAsync(baseUrl))
                 using (HttpContent content = res.Content)
                 {
                     //Retrieve the data from the content of the response, have the await keyword since it is asynchronous.
                     var data = await content.ReadAsStringAsync();
-                    //If the data is not null, parse the data to a C# object
                     if (content != null) //bytte från data till content
                     {
                         //Parse your data into a object.
                         result = JsonConvert.DeserializeObject<T>(data);
+
                     }
                     else
                     {
@@ -56,26 +56,67 @@ namespace SpacePark
 
         public async Task<SpaceTraveller> GetSpaceTraveller(string name)
         {
-            NamePath = $"/people/?search={name}";
+            NamePath = $"https://swapi.dev/api/people/?search={name}";
             var search = await GetStarWarsObject<SearchResultTraveller>(NamePath);
 
-            if (search.results.Any())
+            //if (search.results.Any())
+            //{
+            if (search.results[0].name.ToLower() == name.ToLower())
             {
-                if (search.results.Length > 1)
-                {
-                    throw new Exception("Du är en snålåkare");
-                }
-                else if (search.count < 1)
-                {
-                    throw new Exception("Du är inte en person");
+                Console.WriteLine("Välkommen att välja vilken starship du vill ha: ");
+                // gör metod som skriver ut om person har starshipt och isf vilka
+                // lista 
+                // return name
+               var hej =  await IsPersonStarShipOwner(search.results[0]);
 
-                }
 
-                return search.results[0];
+
             }
+            else
+            {
+                Console.WriteLine("Du är har inte behörighet att parkera här");
 
-            return null;
+            }
+            return search.results[0];
+
+            //}
+
+            //return null;
         }
+        public async Task<Starship> IsPersonStarShipOwner(SpaceTraveller person)
+        {
+
+            foreach (var p in person.starships)
+            {
+                var search = await GetStarWarsObject<Starship>(p);
+
+                if (search.name.ToLower() != null)
+                {
+                    Console.WriteLine(search.name);
+                    // gör metod som skriver ut om person har starshipt och isf vilka
+                    // lista 
+                    // return name
+
+                    //IsPersonStarchipOwner(search.results[0]);
+
+                    return search;
+
+                }
+                else
+                {
+                    Console.WriteLine("Du är har inte något fordon");
+
+                }
+            }
+            return new Starship();
+
+            //if (search.results.Any())
+            //{
+
+
+
+        }
+
 
         public void Dispose()
         {
