@@ -29,7 +29,12 @@ namespace SpacePark.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Person");
                 });
@@ -47,26 +52,21 @@ namespace SpacePark.Migrations
                     b.Property<DateTime?>("Depature")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PersonIdId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StarShipModel")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonIdId");
-
                     b.ToTable("Vehicle");
                 });
 
-            modelBuilder.Entity("SpacePark.Models+Vehicle", b =>
+            modelBuilder.Entity("SpacePark.Models+Person", b =>
                 {
-                    b.HasOne("SpacePark.Models+Person", "PersonId")
+                    b.HasOne("SpacePark.Models+Vehicle", "Vehicle")
                         .WithMany()
-                        .HasForeignKey("PersonIdId");
+                        .HasForeignKey("VehicleId");
 
-                    b.Navigation("PersonId");
+                    b.Navigation("Vehicle");
                 });
 #pragma warning restore 612, 618
         }
