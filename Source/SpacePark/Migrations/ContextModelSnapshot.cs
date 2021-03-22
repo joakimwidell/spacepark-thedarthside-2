@@ -29,7 +29,12 @@ namespace SpacePark.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Person");
                 });
@@ -44,34 +49,23 @@ namespace SpacePark.Migrations
                     b.Property<DateTime>("Arrival")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Depature")
+                    b.Property<DateTime?>("Depature")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
 
                     b.Property<string>("StarShipModel")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId")
-                        .IsUnique();
-
                     b.ToTable("Vehicle");
-                });
-
-            modelBuilder.Entity("SpacePark.Models+Vehicle", b =>
-                {
-                    b.HasOne("SpacePark.Models+Person", null)
-                        .WithOne("Vehicle")
-                        .HasForeignKey("SpacePark.Models+Vehicle", "PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SpacePark.Models+Person", b =>
                 {
+                    b.HasOne("SpacePark.Models+Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId");
+
                     b.Navigation("Vehicle");
                 });
 #pragma warning restore 612, 618

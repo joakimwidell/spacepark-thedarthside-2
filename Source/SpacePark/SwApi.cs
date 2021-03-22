@@ -63,11 +63,11 @@ namespace SpacePark
             //{
             if (search.results[0].name.ToLower() == name.ToLower())
             {
-                Console.WriteLine("Välkommen att välja vilken starship du vill ha: ");
+               
                 // gör metod som skriver ut om person har starshipt och isf vilka
                 // lista 
                 // return name
-                var hej = await IsPersonStarShipOwner(search.results[0]);
+                string selectedShip = await IsPersonStarShipOwner(search.results[0]);
 
 
 
@@ -83,7 +83,7 @@ namespace SpacePark
 
             //return null;
         }
-        public async Task<Starship> IsPersonStarShipOwner(SpaceTraveller person)
+        public async Task<string> IsPersonStarShipOwner(SpaceTraveller person)
         {
             var menu = new Menu();
             List<string> starShips = new List<string>();
@@ -94,7 +94,6 @@ namespace SpacePark
 
                 if (search.name.ToLower() != null)
                 {
-                    Console.WriteLine(search.name);
                     starShips.Add(search.name);
 
                 }
@@ -106,10 +105,10 @@ namespace SpacePark
             }
 
             // TODO Skicka in detta resultatet in i en metod som skapar upp person/Starship i datatbasen
-            var x = menu.ShowMenu("Choose Starship to park", starShips);
+            int starShipIndex = menu.ShowMenu("Choose Starship to park: ", starShips);
             Console.WriteLine("");
-            Console.WriteLine($"You selected {starShips[x]}");
-            return new Starship();
+            Console.WriteLine($"You selected {starShips[starShipIndex]}");
+            return starShips[starShipIndex];
 
         }
 

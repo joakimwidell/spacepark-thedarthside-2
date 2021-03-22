@@ -9,7 +9,7 @@ namespace SpacePark
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!!");
+            
             //var models = new Models();
             var context = new Context();
             //context.Add<Person>(models.NewPerson("Sofie", "Bäverstrand"));
@@ -18,7 +18,7 @@ namespace SpacePark
 
             var test = new SwApi();
             //await test.GetStarWarsObject("/people/?search=Luke Skywalker");
-            var findLuke = await test.GetSpaceTraveller("Luke skywalker");
+            //var findLuke = await test.GetSpaceTraveller("Luke skywalker");
             
             
 
