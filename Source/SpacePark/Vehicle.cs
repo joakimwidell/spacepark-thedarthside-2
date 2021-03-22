@@ -9,7 +9,8 @@ namespace SpacePark
         {
             [Key]
             public int Id { get; set; }
-            public int PersonId { get; set; }
+                
+            public Person PersonId { get; set; }
             public string StarShipModel { get; set; }
             public DateTime Arrival { get; set; } // Denna ges när man ankommer
             public DateTime? Depature { get; set; }// Denna när man lämanar

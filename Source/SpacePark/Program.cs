@@ -9,7 +9,7 @@ namespace SpacePark
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!!");
+            
             //var models = new Models();
             var context = new Context();
             //context.Add<Person>(models.NewPerson("Sofie", "Bäverstrand"));

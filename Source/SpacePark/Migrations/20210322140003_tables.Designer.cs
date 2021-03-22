@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpacePark;
 
 namespace SpacePark.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210322140003_tables")]
+    partial class tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,26 +49,12 @@ namespace SpacePark.Migrations
                     b.Property<DateTime?>("Depature")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PersonIdId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StarShipModel")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonIdId");
-
                     b.ToTable("Vehicle");
-                });
-
-            modelBuilder.Entity("SpacePark.Models+Vehicle", b =>
-                {
-                    b.HasOne("SpacePark.Models+Person", "PersonId")
-                        .WithMany()
-                        .HasForeignKey("PersonIdId");
-
-                    b.Navigation("PersonId");
                 });
 #pragma warning restore 612, 618
         }
