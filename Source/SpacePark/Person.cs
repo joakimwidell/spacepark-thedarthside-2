@@ -16,7 +16,8 @@ namespace SpacePark
 
             // Visar relation mellan person och vehicale(one to many). Varje person är kopplad till en spaceship ID när personen ska parkera
             public Vehicle Vehicle { get; set; }
-           
+            public string FirstName { get; internal set; }
+
             public Person(string name)
             {
                 Name = name;

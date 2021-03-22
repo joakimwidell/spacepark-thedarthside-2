@@ -24,10 +24,10 @@ namespace SpacePark
         {
             return await _context.Person.Where(x => x.Name == Name).FirstOrDefaultAsync();
         }
-        public async Task<Person> GetPersonByLastName(string lastName)
-        {
-            return await _context.Person.Where(x => x.LastName == lastName).FirstOrDefaultAsync();
-        }
+        //public async Task<Person> GetPersonByLastName(string lastName)
+        //{
+        //    return await _context.Person.Where(x => x.LastName == lastName).FirstOrDefaultAsync();
+        //}
         public async Task<List<Person>> GetListOfPeople()
         {
             return await _context.Person.ToListAsync();
