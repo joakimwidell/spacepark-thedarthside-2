@@ -77,30 +77,31 @@ namespace SpacePark
                 Console.WriteLine("Du är har inte behörighet att parkera här");
 
             }
+
+           
             return search.results[0];
 
             //}
 
             //return null;
         }
-        public async Task<string> IsPersonStarShipOwner(SpaceTraveller person)
+
+        public async Task<string> IsPersonStarShipOwner(SpaceTraveller person) // Byt namn på metod, nu är det en bool-metod
         {
             var menu = new Menu();
             List<string> starShips = new List<string>();
 
-            foreach (var p in person.starships)
+            foreach (var accessibleShip in person.starships)
             {
-                var search = await GetStarWarsObject<Starship>(p);
+                var ship = await GetStarWarsObject<Starship>(accessibleShip);
 
-                if (search.name.ToLower() != null)
+                if (ship.name.ToLower() != null)
                 {
-                    starShips.Add(search.name);
-
+                    starShips.Add(ship.name);
                 }
                 else
                 {
                     Console.WriteLine("Du är har inte något fordon");
-
                 }
             }
 
@@ -108,8 +109,15 @@ namespace SpacePark
             int starShipIndex = menu.ShowMenu("Choose Starship to park: ", starShips);
             Console.WriteLine("");
             Console.WriteLine($"You selected {starShips[starShipIndex]}");
-            return starShips[starShipIndex];
 
+            // Här nånstans stoppa in funktion för att skapa vehicle och person
+            var starShip = new Models.Vehicle(starShips[starShipIndex]);
+            var spaceMan = new Models.Person(person.name, starShip); 
+            // enklast att skapa person efter Vehicle, så kommer rätt sak på rätt plats. Men vart göra av?? kanske lägga till en occupant på vehicle, 
+            // då kan vi skapa person utifrån vehicle senare
+            // Här skapar jag SpaceTraveller
+
+            return starShips[starShipIndex];
         }
 
         public void Dispose()
