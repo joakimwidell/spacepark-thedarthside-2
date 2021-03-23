@@ -1,24 +1,25 @@
 # Documentation
 
 ## Krav
-* Registrera parkering i en databas med Code First (EF)
-* Använd EF för queries
-* Vi ska kunna ta ut och lägga till data i vår databas (vem som kommer och vem som går)
-* Hantera antal slottar i p-hus (databasen)
-* Betalning / fakturering
-* Inläsning från API till 
-* response mappas in hos oss
-* vi ska kotrollera om kändisen varit med i SW
-* Om ja, får hen parkera om de åker ett fräckt starship
-* TESTA UNDER TIDEN _INTE_ EFTER
+- [X] Registrera parkering i en databas med Code First (EF)
+- [X] Använd EF för queries
+- [X] Vi ska kunna ta ut och lägga till data i vår databas (vem som kommer och vem som går)
+- [ ] Hantera antal slottar i p-hus (databasen)
+- [ ] Betalning / fakturering
+- [X] Inläsning från API till 
+- [X] response mappas in hos oss
+- [x] vi ska kotrollera om kändisen varit med i SW
+- [x] Om ja, får hen parkera om de åker ett fräckt starship
+- [ ] TESTA UNDER TIDEN _INTE_ EFTER
+- [ ] Skapa en *runklass* som håller uppbyggnaden av appen
 
 ### Ordning
 ### Databas
-1. Rita upp nån sorts ritning över databasen
-2. bygg databasen
-3. ta ut och lägga in data
-4. constraints på tillgänglighet
-5. kontrollera / manipulera data
+- [x] Rita upp nån sorts ritning över databasen
+- [x] bygg databasen
+- [x] ta ut och lägga in data
+- [ ] constraints på tillgänglighet
+- [X] kontrollera / manipulera data
 
 Att tänka på:
 
@@ -35,9 +36,9 @@ När man startar ska men kolla antal ledig platser och skriva om det finns och i
 
 
 ### API
-1. Anropa
+- [x] Anropa
    Först person ==> Fordon ==> kolla ledig parkering ==> lägg in i databasen
-2. Jämföra 
+- [ ] Jämföra 
 Krav: Vi måste skicka request för varje ny besökare och det skall göras async
 
 ### UX
