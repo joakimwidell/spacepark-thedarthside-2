@@ -18,39 +18,20 @@ namespace SpacePark
         }
         public async Task<Person> GetPersonByid(int id)
         {
-            return await _personContext.Person.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _personContext.Person.FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<Person> GetPersonByName(string name)
         {
-            return await _personContext.Person.FirstOrDefaultAsync(x => x.Name == name);
+            return await _personContext.Person.Include(p => p.Vehicle).FirstOrDefaultAsync(x => x.Name == name);
         }
-        //public async Task<int> GetPersonByName(Person person)
-        //{
-        //    var sandra = (from a in _personContext.Vehicle
-        //                                join c in _personContext.Clients on a.UserID equals c.UserID
-        //                                where c.ClientID == yourDescriptionObject.ClientID
-        //                                select a.Balance)
-        //      .SingleOrDefault();
 
-
-
-
-        //    return await hej.Vehicle;
-        //}
-
-        // hitta en person vars vehicleID = vechicle.ID
-        public async Task<Vehicle> CheckOutSpaceShip(Person person)
+        public async Task<Vehicle> CheckOutSpaceShipAsync(Person person)
         {
 
             return await _personContext.Vehicle.FirstOrDefaultAsync(x => x.Id == person.Vehicle.Id);
 
         }
-
-        //public async Task<Person> GetPersonByLastName(string lastName)
-        //{
-        //    return await _context.Person.Where(x => x.LastName == lastName).FirstOrDefaultAsync();
-        //}
-        public async Task<List<Person>> GetListOfPeople()
+        public async Task<List<Person>> GetListOfPeopleAsync()
         {
             return await _personContext.Person.ToListAsync();
         }
@@ -64,5 +45,6 @@ namespace SpacePark
             _personContext.Remove(person);
             await _personContext.SaveChangesAsync();
         }
+       
     }
 }

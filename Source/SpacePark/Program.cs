@@ -24,9 +24,16 @@ namespace SpacePark
 
             var vehicleDataAccess = new VehicleDataAccess(context);
             //await vehicleDataAccess.AddStarShipAsync(starShip);
-            
-            //await personDataAccess.AddPersonAsync(new Person("sandra", starShip));
 
+            //await personDataAccess.AddPersonAsync(new Person("sandra", starShip));
+            //var listOfpeople = await personDataAccess.GetListOfPeople();
+            //var listOfShips = await vehicleDataAccess.GetListOfStarShips();
+            //foreach (var item in listOfShips)
+            //{
+            //    context.Remove(item);
+            //    context.SaveChanges();
+
+            //}
 
             var isThisLuke = await personDataAccess.GetPersonByName("sandra");
             //var personsStarShipid = await personDataAccess.GetPersonByName(isThisLuke);

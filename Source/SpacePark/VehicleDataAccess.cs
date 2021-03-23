@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using static SpacePark.Models;
 
 namespace SpacePark
@@ -18,6 +20,15 @@ namespace SpacePark
             await _starShipContext.AddAsync<Vehicle>(starShip);
             await _starShipContext.SaveChangesAsync();
 
+        }
+        public async Task<List<Vehicle>> GetListOfStarShips()
+        {
+            return await _starShipContext.Vehicle.ToListAsync();
+        }
+        public async Task DeleteStarshipAsync(Vehicle starShip)
+        {
+            _starShipContext.Remove(starShip);
+            await _starShipContext.SaveChangesAsync();
         }
     }
 }
