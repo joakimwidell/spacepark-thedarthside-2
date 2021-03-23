@@ -19,25 +19,46 @@ namespace SpacePark
             var test = new SwApi();
             //await test.GetStarWarsObject("/people/?search=Luke Skywalker");
             //var findLuke = await test.GetSpaceTraveller("Darth vader");
-            var personDataAccess = new PersonDataAccess(context);
-            var starShip = new Vehicle("volvo");
+           
 
             var vehicleDataAccess = new VehicleDataAccess(context);
             //await vehicleDataAccess.AddStarShipAsync(starShip);
 
+
+
+            //// Skapar en volvo och en sandra
+            //var personDataAccess = new PersonDataAccess(context);
+            //var starShip = new Vehicle("volvo");
             //await personDataAccess.AddPersonAsync(new Person("sandra", starShip));
-            //var listOfpeople = await personDataAccess.GetListOfPeople();
+            //var listOfpeople = await personDataAccess.GetListOfPeopleAsync();
+
+
+            //// Tömmer databasen på starships
             //var listOfShips = await vehicleDataAccess.GetListOfStarShips();
             //foreach (var item in listOfShips)
             //{
             //    context.Remove(item);
             //    context.SaveChanges();
-
             //}
 
-            var isThisLuke = await personDataAccess.GetPersonByName("sandra");
+
+            //// Hämtar personinfo
+            //var personDataAccess = new PersonDataAccess(context);
+            //var isThisLuke = await personDataAccess.GetPersonByNameAsync("sandra");
+
+
             //var personsStarShipid = await personDataAccess.GetPersonByName(isThisLuke);
             //var findeSpaceShip = await personDataAccess.CheckOutSpaceShip(isThisLuke);
+
+
+
+
+
+            // Tar bort en parkeringsgäst
+            var parkingHouseDataAccess = new ParkingHouseDataAccess(context);
+            var yesorno = await parkingHouseDataAccess.IsPersonParked("sandra");
+
+            //await parkingHouseDataAccess.PersonAndVehicleLeaving(isThisLuke);
 
             Console.ReadKey();
 

@@ -20,7 +20,7 @@ namespace SpacePark
         {
             return await _personContext.Person.FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<Person> GetPersonByName(string name)
+        public async Task<Person> GetPersonByNameAsync(string name)
         {
             return await _personContext.Person.Include(p => p.Vehicle).FirstOrDefaultAsync(x => x.Name == name);
         }
@@ -31,6 +31,7 @@ namespace SpacePark
             return await _personContext.Vehicle.FirstOrDefaultAsync(x => x.Id == person.Vehicle.Id);
 
         }
+
         public async Task<List<Person>> GetListOfPeopleAsync()
         {
             return await _personContext.Person.ToListAsync();

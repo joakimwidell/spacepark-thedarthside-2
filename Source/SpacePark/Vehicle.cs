@@ -24,7 +24,6 @@ namespace SpacePark
             public Vehicle(string name)
             {
                 StarShipModel = name;
-
             }
         }
     }
