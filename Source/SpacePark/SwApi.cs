@@ -60,6 +60,7 @@ namespace SpacePark
             NamePath = $"https://swapi.dev/api/people/?search={name}";
             var search = await GetStarWarsObject<SearchResultTraveller>(NamePath);
 
+          
             try
             {
                 if (search.results[0].name.ToLower() == name.ToLower())
@@ -68,7 +69,7 @@ namespace SpacePark
                 }
                 else
                 {
-                    Console.WriteLine("Enter valid name please!");
+                    Console.WriteLine("You have to enter you full name...");
                 }
             }
             catch (Exception)

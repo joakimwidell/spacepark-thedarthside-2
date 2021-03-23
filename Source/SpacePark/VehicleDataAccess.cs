@@ -5,7 +5,7 @@ using static SpacePark.Models;
 
 namespace SpacePark
 {
-    public class VehicleDataAccess
+    public class VehicleDataAccess 
     {
         private readonly Context _Context;
 
