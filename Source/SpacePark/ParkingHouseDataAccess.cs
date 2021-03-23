@@ -37,6 +37,15 @@ namespace SpacePark
             await vehicleDataAccess.DeleteStarshipAsync(test);
             await personDataAccess.DeletePersonAsync(person);
         }
+
+        // TO DO
+        // - Metod för att kontrollera antalet parkerade travellers
+
+
+
+
+
+
     }
 }
 
