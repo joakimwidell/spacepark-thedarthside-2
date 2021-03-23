@@ -7,7 +7,7 @@ namespace SpacePark
 {
     public partial class Models
     {
-        public class Person
+        public class Person 
         {
             [Key]
             public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace SpacePark
             }
             public Person(string name, Vehicle starShip)
             {
-                Name = name;
+                Name = name.ToLower();
                 Vehicle = starShip;
             }
         }

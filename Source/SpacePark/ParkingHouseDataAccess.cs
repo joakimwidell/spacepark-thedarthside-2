@@ -8,31 +8,35 @@ using static SpacePark.Models;
 
 namespace SpacePark
 {
-    public class ParkingHouseDataAccess
+    public class ParkingHouseDataAccess  
     {
-        private readonly Context _parkingHouseContext;
-
-        //public var context = new Context();
-
-        //private VehicleDataAccess _spaceShip = new VehicleDataAccess();
-        //private PersonDataAccess _person;
+        private readonly Context _Context;
+        private readonly PersonDataAccess personDataAccess = new(new Context());
+        private readonly VehicleDataAccess vehicleDataAccess = new(new Context());
 
         public ParkingHouseDataAccess(Context context)
         {
-            _parkingHouseContext = context;
+            _Context = context;
+        }
+        public void TimeParked(Vehicle vehicle)
+        {
+            //new DateTime(2019, 9, 7, 15, 20, 35);
+            DateTime start = (DateTime)vehicle.Arrival;
+            DateTime end = DateTime.Now;
+            TimeSpan testTimeSpan = end.Subtract(start);
+            string hej = $"TimeSpan{testTimeSpan.Days}{testTimeSpan.Hours}{testTimeSpan.Minutes}{testTimeSpan.Minutes}";
+
         }
 
         public async Task<bool> IsPersonParked(string name)
         {
-            var personDataAccess = new PersonDataAccess(_parkingHouseContext);
             var parkedPeople = await personDataAccess.GetListOfPeopleAsync();
             return parkedPeople.Exists(x => x.Name == name);
         }
 
         public async Task PersonAndVehicleLeaving(Person person)
         {
-            var vehicleDataAccess = new VehicleDataAccess(_parkingHouseContext);
-            var personDataAccess = new PersonDataAccess(_parkingHouseContext);
+            
             var test = person.Vehicle;
             await vehicleDataAccess.DeleteStarshipAsync(test);
             await personDataAccess.DeletePersonAsync(person);

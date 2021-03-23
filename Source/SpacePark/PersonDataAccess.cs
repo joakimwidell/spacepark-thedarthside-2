@@ -10,41 +10,41 @@ namespace SpacePark
 {
     public class PersonDataAccess
     {
-        private readonly Context _personContext;
+        private readonly Context _Context;
 
         public PersonDataAccess(Context context)
         {
-            _personContext = context;
+            _Context = context;
         }
         public async Task<Person> GetPersonByid(int id)
         {
-            return await _personContext.Person.FirstOrDefaultAsync(x => x.Id == id);
+            return await _Context.Person.FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<Person> GetPersonByNameAsync(string name)
         {
-            return await _personContext.Person.Include(p => p.Vehicle).FirstOrDefaultAsync(x => x.Name == name);
+            return await _Context.Person.Include(p => p.Vehicle).FirstOrDefaultAsync(x => x.Name == name.ToLower());
         }
 
         public async Task<Vehicle> CheckOutSpaceShipAsync(Person person)
         {
 
-            return await _personContext.Vehicle.FirstOrDefaultAsync(x => x.Id == person.Vehicle.Id);
+            return await _Context.Vehicle.FirstOrDefaultAsync(x => x.Id == person.Vehicle.Id);
 
         }
 
         public async Task<List<Person>> GetListOfPeopleAsync()
         {
-            return await _personContext.Person.ToListAsync();
+            return await _Context.Person.ToListAsync();
         }
         public async Task AddPersonAsync(Person person)
         {
-            await _personContext.AddAsync<Person>(person);
-            await _personContext.SaveChangesAsync();
+            await _Context.AddAsync<Person>(person);
+            await _Context.SaveChangesAsync();
         }
         public async Task DeletePersonAsync(Person person)
         {
-            _personContext.Remove(person);
-            await _personContext.SaveChangesAsync();
+            _Context.Remove(person);
+            await _Context.SaveChangesAsync();
         }
        
     }

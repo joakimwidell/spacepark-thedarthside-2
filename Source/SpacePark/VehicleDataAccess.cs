@@ -7,28 +7,28 @@ namespace SpacePark
 {
     public class VehicleDataAccess
     {
-        private readonly Context _starShipContext;
+        private readonly Context _Context;
 
         // Depature (TimeSpan) Arrival * Pris = Kostnad när man lämnar
         public VehicleDataAccess(Context context)
         {
-            _starShipContext = context;
+            _Context = context;
         }
         public async Task AddStarShipAsync(Vehicle starShip)
         {
 
-            await _starShipContext.AddAsync<Vehicle>(starShip);
-            await _starShipContext.SaveChangesAsync();
+            await _Context.AddAsync<Vehicle>(starShip);
+            await _Context.SaveChangesAsync();
 
         }
         public async Task<List<Vehicle>> GetListOfStarShips()
         {
-            return await _starShipContext.Vehicle.ToListAsync();
+            return await _Context.Vehicle.ToListAsync();
         }
         public async Task DeleteStarshipAsync(Vehicle starShip)
         {
-            _starShipContext.Remove(starShip);
-            await _starShipContext.SaveChangesAsync();
+            _Context.Remove(starShip);
+            await _Context.SaveChangesAsync();
         }
     }
 }
