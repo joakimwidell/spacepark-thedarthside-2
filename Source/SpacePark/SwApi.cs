@@ -17,7 +17,8 @@ namespace SpacePark
         private string NamePath { get; set; }
         public string ShipName { get; set; }
         public string ShipPath { get; set; }
-        HttpClient client = new HttpClient();
+
+        readonly HttpClient Client = new();
 
         public async Task<T> GetStarWarsObject<T>(string path) // för att kunna göra massa olika anrop
         {
@@ -27,7 +28,7 @@ namespace SpacePark
             try
             {
                 // using () // flera using kan läggas på varandra
-                using (HttpResponseMessage res = await client.GetAsync(baseUrl))
+                using (HttpResponseMessage res = await Client.GetAsync(baseUrl))
                 using (HttpContent content = res.Content)
                 {
                     //Retrieve the data from the content of the response, have the await keyword since it is asynchronous.
@@ -59,34 +60,28 @@ namespace SpacePark
             NamePath = $"https://swapi.dev/api/people/?search={name}";
             var search = await GetStarWarsObject<SearchResultTraveller>(NamePath);
 
-            //if (search.results.Any())
-            //{
-            if (search.results[0].name.ToLower() == name.ToLower())
+            try
             {
-               
-                // gör metod som skriver ut om person har starshipt och isf vilka
-                // lista 
-                // return name
-                string selectedShip = await IsPersonStarShipOwner(search.results[0]);
-
-
-
+                if (search.results[0].name.ToLower() == name.ToLower())
+                {
+                    return search.results[0];
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid name please!");
+                }
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Du är har inte behörighet att parkera här");
+                Console.WriteLine("You don't have authority to park here! Get out of here!!");
+            };
 
-            }
-            return search.results[0];
-
-            //}
-
-            //return null;
+            return null;
         }
-        public async Task<string> IsPersonStarShipOwner(SpaceTraveller person)
+        public async Task<string> PersonStarShipOwner(SpaceTraveller person)
         {
             var menu = new Menu();
-            List<string> starShips = new List<string>();
+            List<string> starShips = new();
 
             foreach (var p in person.starships)
             {
@@ -95,26 +90,25 @@ namespace SpacePark
                 if (search.name.ToLower() != null)
                 {
                     starShips.Add(search.name);
-
                 }
                 else
                 {
                     Console.WriteLine("Du är har inte något fordon");
-
                 }
             }
+            starShips.Add("Exit");
 
             // TODO Skicka in detta resultatet in i en metod som skapar upp person/Starship i datatbasen
             int starShipIndex = menu.ShowMenu("Choose Starship to park: ", starShips);
-            Console.WriteLine("");
-            Console.WriteLine($"You selected {starShips[starShipIndex]}");
+
             return starShips[starShipIndex];
 
         }
+        //string selectedShip = await IsPersonStarShipOwner(search.results[0]);
 
         public void Dispose()
         {
-            client?.Dispose();
+            Client?.Dispose();
         }
     }
 }

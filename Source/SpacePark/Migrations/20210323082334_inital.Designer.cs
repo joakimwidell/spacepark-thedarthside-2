@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpacePark;
 
 namespace SpacePark.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210323082334_inital")]
+    partial class inital
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,14 +41,14 @@ namespace SpacePark.Migrations
                     b.ToTable("Person");
                 });
 
-            modelBuilder.Entity("SpacePark.Vehicle", b =>
+            modelBuilder.Entity("SpacePark.Models+Vehicle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("Arrival")
+                    b.Property<DateTime>("Arrival")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Depature")
@@ -62,7 +64,7 @@ namespace SpacePark.Migrations
 
             modelBuilder.Entity("SpacePark.Models+Person", b =>
                 {
-                    b.HasOne("SpacePark.Vehicle", "Vehicle")
+                    b.HasOne("SpacePark.Models+Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId");
 

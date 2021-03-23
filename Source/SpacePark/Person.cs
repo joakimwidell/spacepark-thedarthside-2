@@ -13,9 +13,14 @@ namespace SpacePark
             public int Id { get; set; }
             public string Name { get; set; }
             public Vehicle Vehicle { get; set; }
-            public Person(string name)
+            public Person()
+            {
+
+            }
+            public Person(string name, Vehicle starShip)
             {
                 Name = name;
+                Vehicle = starShip;
             }
         }
     }
