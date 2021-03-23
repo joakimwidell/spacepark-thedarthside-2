@@ -11,12 +11,14 @@ namespace SpacePark
     public class ParkingHouseDataAccess  
     {
         private readonly Context _Context;
-        private readonly PersonDataAccess personDataAccess = new(new Context());
-        private readonly VehicleDataAccess vehicleDataAccess = new(new Context());
+        private readonly PersonDataAccess _personDataAccess;
+        private readonly VehicleDataAccess _vehicleDataAccess;
 
-        public ParkingHouseDataAccess(Context context)
+        public ParkingHouseDataAccess(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
         {
             _Context = context;
+            _vehicleDataAccess = vehicleDataAccess;
+            _personDataAccess = personDataAccess;
         }
         public void TimeParked(Vehicle vehicle)
         {
@@ -25,12 +27,11 @@ namespace SpacePark
             DateTime end = DateTime.Now;
             TimeSpan testTimeSpan = end.Subtract(start);
             string hej = $"TimeSpan{testTimeSpan.Days}{testTimeSpan.Hours}{testTimeSpan.Minutes}{testTimeSpan.Minutes}";
-
         }
 
         public async Task<bool> IsPersonParked(string name)
         {
-            var parkedPeople = await personDataAccess.GetListOfPeopleAsync();
+            var parkedPeople = await _personDataAccess.GetListOfPeopleAsync();
             return parkedPeople.Exists(x => x.Name == name);
         }
 
@@ -38,8 +39,8 @@ namespace SpacePark
         {
             
             var test = person.Vehicle;
-            await vehicleDataAccess.DeleteStarshipAsync(test);
-            await personDataAccess.DeletePersonAsync(person);
+            await _vehicleDataAccess.DeleteStarshipAsync(test);
+            await _personDataAccess.DeletePersonAsync(person);
         }
 
         // TO DO

@@ -24,13 +24,16 @@ namespace SpacePark
             var vehicleDataAccess = new VehicleDataAccess(context);
             //await vehicleDataAccess.AddStarShipAsync(starShip);
       
-               
 
 
 
             //// Skapar en volvo och en sandra
             var personDataAccess = new PersonDataAccess(context);
             var starShip = new Vehicle("x-wing");
+
+
+            var bla = new ParkingHouseDataAccess(context, vehicleDataAccess, personDataAccess);
+          bool testar =  await bla.IsPersonParked("luke skywalker");
             //await personDataAccess.AddPersonAsync(new Person("Luke Skywalker", starShip));
             //Person luke = await personDataAccess.GetPersonByNameAsync("luke skywalker");
             //var listOfpeople = await personDataAccess.GetListOfPeopleAsync();
@@ -57,9 +60,9 @@ namespace SpacePark
 
 
 
-            // Tar bort en parkeringsgäst
-            var parkingHouseDataAccess = new ParkingHouseDataAccess(context);
-            var yesorno = await parkingHouseDataAccess.IsPersonParked("Luke Skywalker");
+            //// Tar bort en parkeringsgäst
+            //var parkingHouseDataAccess = new ParkingHouseDataAccess(context);
+            //var yesorno = await parkingHouseDataAccess.IsPersonParked("Luke Skywalker");
 
             //await parkingHouseDataAccess.PersonAndVehicleLeaving(isThisLuke);
 
