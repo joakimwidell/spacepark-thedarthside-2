@@ -63,13 +63,13 @@ namespace SpacePark
                 else
                 {
                     // TODO Hantera här!!
-                    Console.WriteLine("You have to enter your full name...");
+                    Console.WriteLine("You have entered an invalid name, please enter your full name.");
                 }
             }
             catch (Exception)
             {
                 // TODO Hantera här!!
-                Console.WriteLine("You don't have authority to park here! Get out of here!!");
+                Console.WriteLine("You are not famous and can't access this spacapark.");
             };
 
             return null;
