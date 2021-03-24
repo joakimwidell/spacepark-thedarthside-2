@@ -20,7 +20,7 @@ namespace SpacePark
 
         readonly HttpClient Client = new();
 
-        public async Task<T> GetStarWarsObject<T>(string path) 
+        public async Task<T> GetStarWarsObject<T>(string path)
         {
             string baseUrl = $"{path}";
             T result = default;
@@ -30,7 +30,7 @@ namespace SpacePark
                 using (HttpContent content = res.Content)
                 {
                     var data = await content.ReadAsStringAsync();
-                    if (content != null) 
+                    if (content != null)
                     {
                         result = JsonConvert.DeserializeObject<T>(data);
                     }
@@ -78,25 +78,20 @@ namespace SpacePark
 
         public async Task<string> ChooseStarShip(SpaceTraveller person)
         {
-            var menu = new Menu();
-            List<string> starShips = new();
-
-            foreach (var p in person.StarShips)
+            if (!person.StarShips.Any())
             {
-                var search = await GetStarWarsObject<Starship>(p);
-
-                if (search.Name.ToLower() != null)
-                {
-                    starShips.Add(search.Name);
-                }
-                else
-                {
-                    // TODO Hantera här!!
-                    Console.WriteLine("You don't have a starship");
-                }
+                Console.WriteLine("You don't have a spaceship to park. Next, please!");
+                return "";
             }
 
-            starShips.Add("Exit");
+            var menu = new Menu();
+            List<string> starShips = new();
+            
+            foreach (var starShip in person.StarShips)
+            {
+                var search = await GetStarWarsObject<Starship>(starShip);
+                starShips.Add(search.Name);
+            }
 
             int starShipIndex = menu.ShowMenu("Choose Starship to park: ", starShips);
 

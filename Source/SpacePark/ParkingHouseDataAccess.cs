@@ -51,12 +51,15 @@ namespace SpacePark
             return parkedPeople.Exists(x => x.Name == name);
         }
 
-        public async Task PersonAndVehicleLeaving(Person person)
+        public async Task PersonAndVehicleLeaving(Person person) 
         {
-            var test = person.Vehicle;
-            await _vehicleDataAccess.DeleteStarshipAsync(test);
+            var vehicle = person.Vehicle;
+            await _vehicleDataAccess.DeleteStarshipAsync(vehicle);
             await _personDataAccess.DeletePersonAsync(person);
+            // Ska det vara en SaveChanges här??
         }
+
+        // TODO Generera en faktura $$$
     }
 }
 

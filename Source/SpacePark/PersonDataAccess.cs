@@ -50,5 +50,10 @@ namespace SpacePark
             _Context.Remove(person);
             await _Context.SaveChangesAsync();
         }
+
+        public Person CreatePerson(SpaceTraveller spaceTraveller, string starShip)
+        {
+            return new Person(spaceTraveller.Name, new Vehicle(starShip));
+        }
     }
 }

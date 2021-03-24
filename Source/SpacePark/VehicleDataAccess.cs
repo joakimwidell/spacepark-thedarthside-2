@@ -23,7 +23,7 @@ namespace SpacePark
 
         }
 
-        public async Task<List<Vehicle>> GetListOfStarShips()
+        public async Task<List<Vehicle>> GetListOfStarShipsAsync()
         {
             return await _Context.Vehicle.ToListAsync();
         }
