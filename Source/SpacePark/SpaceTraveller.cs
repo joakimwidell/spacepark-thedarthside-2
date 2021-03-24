@@ -11,13 +11,12 @@ namespace SpacePark
 {
     public class SpaceTraveller
     {
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
         public string height { get; set; }
         public string mass { get; set; }
         public string hair_color { get; set; }
-
-        [JsonProperty("skin_color")]  // fixar så man kan följa namnkonventioner
-        public string SkinColor { get; set; }
+        public string skin_color { get; set; }
         public string eye_color { get; set; }
         public string birth_year { get; set; }
         public string gender { get; set; }
@@ -25,7 +24,8 @@ namespace SpacePark
         public string[] films { get; set; }
         public object[] species { get; set; }
         public string[] vehicles { get; set; }
-        public string[] starships { get; set; }
+        [JsonProperty("starships")]
+        public string[] StarShips { get; set; }
         public DateTime created { get; set; }
         public DateTime edited { get; set; }
         public string url { get; set; }

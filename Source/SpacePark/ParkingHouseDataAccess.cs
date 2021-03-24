@@ -35,6 +35,7 @@ namespace SpacePark
             _vehicleDataAccess = vehicleDataAccess;
             _personDataAccess = personDataAccess;
         }
+
         public void TimeParked(Vehicle vehicle)
         {
             //new DateTime(2019, 9, 7, 15, 20, 35);
@@ -52,20 +53,10 @@ namespace SpacePark
 
         public async Task PersonAndVehicleLeaving(Person person)
         {
-
             var test = person.Vehicle;
             await _vehicleDataAccess.DeleteStarshipAsync(test);
             await _personDataAccess.DeletePersonAsync(person);
         }
-
-        // TO DO
-        // - Metod för att kontrollera antalet parkerade travellers
-
-
-
-
-
-
     }
 }
 

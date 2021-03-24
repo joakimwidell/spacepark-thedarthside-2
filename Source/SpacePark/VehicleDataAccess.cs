@@ -9,11 +9,12 @@ namespace SpacePark
     {
         private readonly Context _Context;
 
-        // Depature (TimeSpan) Arrival * Pris = Kostnad när man lämnar
+        // TODO Depature (TimeSpan) Arrival * Pris = Kostnad när man lämnar
         public VehicleDataAccess(Context context)
         {
             _Context = context;
         }
+
         public async Task AddStarShipAsync(Vehicle starShip)
         {
 
@@ -21,10 +22,12 @@ namespace SpacePark
             await _Context.SaveChangesAsync();
 
         }
+
         public async Task<List<Vehicle>> GetListOfStarShips()
         {
             return await _Context.Vehicle.ToListAsync();
         }
+
         public async Task DeleteStarshipAsync(Vehicle starShip)
         {
             _Context.Remove(starShip);

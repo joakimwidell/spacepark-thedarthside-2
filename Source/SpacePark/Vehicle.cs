@@ -9,13 +9,10 @@ namespace SpacePark
     {
         public class Vehicle
         {
-
-
             [Key]
             public int Id { get; set; }
             public string StarShipModel { get; set; }
-
-            public DateTime? Arrival = DateTime.Now;// Denna ges när man ankommer
+            public DateTime? Arrival = DateTime.Now;
 
             public Vehicle()
             {

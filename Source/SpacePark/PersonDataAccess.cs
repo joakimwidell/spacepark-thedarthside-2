@@ -16,10 +16,12 @@ namespace SpacePark
         {
             _Context = context;
         }
+
         public async Task<Person> GetPersonByid(int id)
         {
             return await _Context.Person.FirstOrDefaultAsync(x => x.Id == id);
         }
+
         public async Task<Person> GetPersonByNameAsync(string name)
         {
             return await _Context.Person.Include(p => p.Vehicle).FirstOrDefaultAsync(x => x.Name == name.ToLower());
@@ -36,16 +38,17 @@ namespace SpacePark
         {
             return await _Context.Person.ToListAsync();
         }
+
         public async Task AddPersonAsync(Person person)
         {
             await _Context.AddAsync<Person>(person);
             await _Context.SaveChangesAsync();
         }
+
         public async Task DeletePersonAsync(Person person)
         {
             _Context.Remove(person);
             await _Context.SaveChangesAsync();
         }
-       
     }
 }
