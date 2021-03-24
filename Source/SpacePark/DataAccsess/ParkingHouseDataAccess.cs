@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SpacePark.Models;
 
 namespace SpacePark
 {
     public class ParkingHouseDataAccess
     {
-        private readonly Context _Context;
+        private readonly Context _Context = new Context();
         private readonly PersonDataAccess _personDataAccess;
         private readonly VehicleDataAccess _vehicleDataAccess;
         private readonly int maxSpaces = 50;

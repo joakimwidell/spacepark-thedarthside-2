@@ -8,20 +8,44 @@ namespace SpacePark
 {
     public class Run
     {
-        private readonly ParkingHouseDataAccess _parkingHouseDataAccess;
-        private readonly PersonDataAccess _personDataAccess;
-        private readonly VehicleDataAccess _vehicleDataAccess;
+        public async Task Start()
+        {
+            var swapi = new SwApi();
+            var context = new Context();
+            var vehicleDataAccess = new VehicleDataAccess(context);
+            var personDataAccess = new PersonDataAccess(context);
+            var parkingHouseDataAccess = new ParkingHouseDataAccess(context, vehicleDataAccess, personDataAccess);
 
-        public Run(ParkingHouseDataAccess parkingHouseDataAccess, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
-        {
-            _parkingHouseDataAccess = parkingHouseDataAccess;
-            _vehicleDataAccess = vehicleDataAccess;
-            _personDataAccess = personDataAccess;
+            var freespaces = await parkingHouseDataAccess.ShowFreeSpaces();
+            Console.WriteLine($"Welcome to SpacePark! \n{freespaces}");
+
+            while (true)
+            {
+                Console.Write("Enter name :");
+                string test = Console.ReadLine();
+                var spaceMan = await swapi.GetSpaceTraveller(test);
+                if (spaceMan != null)
+                {
+                    var spacemansStarship = await swapi.ChooseStarShip(spaceMan);
+
+                }
+
+                //var parkingGuest = personDataAccess.CreatePerson(spaceMan, spacemansStarship);
+                //await personDataAccess.AddPersonAsync(parkingGuest);
+
+
+            }
+
         }
-        public async void Start()
+        private async Task LeavParkingHouse() 
         {
-            var freespaces = await _parkingHouseDataAccess.ShowFreeSpaces();
-            Console.WriteLine($"Welcome to SpacePark! {freespaces}");
         }
+        private async Task EnterParkingHouse()
+        {
+        }
+
+
+
+
     }
 }

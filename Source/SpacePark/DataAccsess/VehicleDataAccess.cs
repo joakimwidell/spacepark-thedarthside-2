@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static SpacePark.Models;
 
 namespace SpacePark
 {
     public class VehicleDataAccess 
     {
-        private readonly Context _Context;
+        private readonly Context _Context = new Context();
+
 
         // TODO Depature (TimeSpan) Arrival * Pris = Kostnad när man lämnar
         public VehicleDataAccess(Context context)

@@ -50,7 +50,8 @@ namespace SpacePark.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Depature")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue("getdate()");
 
                     b.Property<string>("StarShipModel")
                         .HasColumnType("nvarchar(max)");

@@ -1,5 +1,4 @@
 ﻿using System;
-using static SpacePark.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +9,6 @@ namespace SpacePark
         static async Task Main(string[] args)
         {
             //var models = new Models();
-            var context = new Context();
             //context.Add<Person>(models.NewPerson("Sofie", "Bäverstrand"));
             //var person = context.Person.Where(x => x.Id == 5).FirstOrDefault();
             //context.Remove(person);
@@ -19,12 +17,17 @@ namespace SpacePark
             //await test.GetStarWarsObject("/people/?search=Luke Skywalker");
             //var findLuke = await test.GetSpaceTraveller("luke");
 
-            var vehicleDataAccess = new VehicleDataAccess(context);
-            var personDataAccess = new PersonDataAccess(context);
-            var parkingHouseDataAccess = new ParkingHouseDataAccess(context, vehicleDataAccess, personDataAccess);
+
+            //var swapi = new SwApi();
+
+            //var start = new Run();
+            //await  start.Start();
             var swapi = new SwApi();
-            
-            //await vehicleDataAccess.AddStarShipAsync(starShip);
+            var context = new Context();
+            var vehicleDataAccess = new VehicleDataAccess(context);
+            var starShip = new Vehicle("bil");
+
+            await vehicleDataAccess.AddStarShipAsync(starShip);
 
             ////// Skapar en volvo och en sandra
             //var personDataAccess = new PersonDataAccess(context);
@@ -44,7 +47,7 @@ namespace SpacePark
             //    context.SaveChanges();
             //}
 
-            //// Tömmer databasen på starships
+            ////Tömmer databasen på starships
             //var listOfShips = await vehicleDataAccess.GetListOfStarShipsAsync();
             //foreach (var item in listOfShips)
             //{
@@ -77,7 +80,6 @@ namespace SpacePark
 
 
 
-            Console.ReadLine();
         }
     }
 }

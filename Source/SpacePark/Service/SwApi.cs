@@ -54,7 +54,6 @@ namespace SpacePark
         {
             NamePath = $"https://swapi.dev/api/people/?search={name}";
             var search = await GetStarWarsObject<SearchResultTraveller>(NamePath);
-
             try
             {
                 if (search.results[0].Name.ToLower() == name.ToLower())
@@ -78,7 +77,7 @@ namespace SpacePark
 
         public async Task<string> ChooseStarShip(SpaceTraveller person)
         {
-            if (!person.StarShips.Any())
+            if (!person.StarShips.Any() )
             {
                 Console.WriteLine("You don't have a spaceship to park. Next, please!");
                 return "";
