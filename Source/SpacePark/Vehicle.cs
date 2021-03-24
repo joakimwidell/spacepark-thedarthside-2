@@ -12,12 +12,13 @@ namespace SpacePark
             [Key]
             public int Id { get; set; }
             public string StarShipModel { get; set; }
-            public DateTime? Arrival = DateTime.Now;
+            public DateTime Arrival = DateTime.Now; // TODO kommer inte med i db än
 
             public Vehicle()
             {
 
             }
+
             public Vehicle(string name)
             {
                 StarShipModel = name;

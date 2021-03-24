@@ -15,6 +15,13 @@ namespace SpacePark
         private readonly VehicleDataAccess _vehicleDataAccess;
         private readonly int maxSpaces = 50;
 
+        public ParkingHouseDataAccess(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
+        {
+            _Context = context;
+            _vehicleDataAccess = vehicleDataAccess;
+            _personDataAccess = personDataAccess;
+        }
+
         public async Task<string> ShowFreeSpaces()
         {
             var parkedPersons = await _personDataAccess.GetListOfPeopleAsync();
@@ -28,14 +35,7 @@ namespace SpacePark
                 return $"{freeSpaces} available parkingplaces";
             }
         }
-
-        public ParkingHouseDataAccess(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
-        {
-            _Context = context;
-            _vehicleDataAccess = vehicleDataAccess;
-            _personDataAccess = personDataAccess;
-        }
-
+        
         public void TimeParked(Vehicle vehicle)
         {
             //new DateTime(2019, 9, 7, 15, 20, 35);
