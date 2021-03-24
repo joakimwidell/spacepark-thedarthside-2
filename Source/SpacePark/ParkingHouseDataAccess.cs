@@ -8,11 +8,26 @@ using static SpacePark.Models;
 
 namespace SpacePark
 {
-    public class ParkingHouseDataAccess  
+    public class ParkingHouseDataAccess
     {
         private readonly Context _Context;
         private readonly PersonDataAccess _personDataAccess;
         private readonly VehicleDataAccess _vehicleDataAccess;
+        private readonly int maxSpaces = 50;
+
+        public async Task<string> ShowFreeSpaces()
+        {
+            var parkedPersons = await _personDataAccess.GetListOfPeopleAsync();
+            var freeSpaces = maxSpaces - parkedPersons.Count();
+            if (freeSpaces <= 0)
+            {
+                return "No available parkingplaces";
+            }
+            else
+            {
+                return $"{freeSpaces} available parkingplaces";
+            }
+        }
 
         public ParkingHouseDataAccess(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
         {
@@ -37,7 +52,7 @@ namespace SpacePark
 
         public async Task PersonAndVehicleLeaving(Person person)
         {
-            
+
             var test = person.Vehicle;
             await _vehicleDataAccess.DeleteStarshipAsync(test);
             await _personDataAccess.DeletePersonAsync(person);

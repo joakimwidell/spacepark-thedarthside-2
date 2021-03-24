@@ -14,8 +14,8 @@ namespace SpacePark
             [Key]
             public int Id { get; set; }
             public string StarShipModel { get; set; }
+
             public DateTime? Arrival = DateTime.Now;// Denna ges när man ankommer
-            public DateTime? Depature { get; set; }// Denna när man lämanar
 
             public Vehicle()
             {
