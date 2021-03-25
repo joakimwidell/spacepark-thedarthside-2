@@ -24,8 +24,6 @@ namespace SpacePark
 
         public async Task Start()
         {
-
-
             var menu = new Menu();
 
             while (true)
@@ -34,12 +32,14 @@ namespace SpacePark
                 var freespaces = await _parkingHouseDataAccess.ShowFreeSpaces();
 
                 Console.WriteLine($"Welcome to SpacePark! \nWe have {freespaces} available parking spots\n");
-                if (freespaces! > 0)
+                if (freespaces > 0)
+                {
+                    select = menu.ShowMenu("Would you like to :", new List<string> { "Park Spaceship", "Check out Spaceship", "Exit" });
+                }
+                else
+                {
                     select = menu.ShowMenu("Would you like to :", new List<string> { "Check out Spaceship", "Exit" });
-
-
-                select = menu.ShowMenu("Would you like to :", new List<string> { "Park Spaceship", "Check out Spaceship", "Exit" });
-
+                }
                 Console.Clear();
 
                 if (select == 2)
@@ -76,8 +76,6 @@ namespace SpacePark
                         Console.Clear();
                         break;
 
-                    default:
-                        break;
                 }
             }
         }
