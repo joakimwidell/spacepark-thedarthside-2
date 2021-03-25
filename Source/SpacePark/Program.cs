@@ -28,6 +28,7 @@ namespace SpacePark
             var starShip = new Vehicle("bil");
 
             await vehicleDataAccess.AddStarShipAsync(starShip);
+            
 
             ////// Skapar en volvo och en sandra
             //var personDataAccess = new PersonDataAccess(context);
