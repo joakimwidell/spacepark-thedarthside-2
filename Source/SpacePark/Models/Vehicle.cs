@@ -11,7 +11,6 @@ namespace SpacePark
         public int Id { get; set; }
         public string StarShipModel { get; set; }
         public DateTime Arrival { get; set; }
-        //public DateTime Depature { get; set; }
         public Vehicle()
         {
 
@@ -20,7 +19,6 @@ namespace SpacePark
         {
             StarShipModel = name;
             this.Arrival = DateTime.Now;
-            //this.Depature = DateTime.Now;
         }
 
 
