@@ -9,53 +9,46 @@ namespace SpacePark
 {
     public class ParkingHouseDataAccess
     {
-        private readonly Context _Context = new Context();
+        private readonly Context _parkingHouseContext = new Context();
         private readonly PersonDataAccess _personDataAccess;
         private readonly VehicleDataAccess _vehicleDataAccess;
-        private readonly int maxSpaces = 50;
+        private readonly int maxSpaces = 4;
 
         public ParkingHouseDataAccess(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
         {
-            _Context = context;
+            _parkingHouseContext = context;
             _vehicleDataAccess = vehicleDataAccess;
             _personDataAccess = personDataAccess;
         }
-
-        public async Task<string> ShowFreeSpaces()
+        public double TimeParked(Vehicle vehicle)
         {
-            var parkedPersons = await _personDataAccess.GetListOfPeopleAsync();
-            var freeSpaces = maxSpaces - parkedPersons.Count();
-            if (freeSpaces <= 0)
-            {
-                return "No available parkingplaces";
-            }
-            else
-            {
-                return $"{freeSpaces} available parkingplaces";
-            }
-        }
-        
-        public void TimeParked(Vehicle vehicle)
-        {
-            //new DateTime(2019, 9, 7, 15, 20, 35);
             DateTime start = (DateTime)vehicle.Arrival;
             DateTime end = DateTime.Now;
-            TimeSpan testTimeSpan = end.Subtract(start);
-            string hej = $"TimeSpan{testTimeSpan.Days}{testTimeSpan.Hours}{testTimeSpan.Minutes}{testTimeSpan.Minutes}";
+            return (end - start).TotalMinutes;
         }
 
+        public double CostOfParking(double timeParked)
+        {
+            return Math.Round(timeParked, 0) * 250;
+        }
+
+        public async Task<int> ShowFreeSpaces()
+        {
+            var parkedPersons = await _personDataAccess.GetListOfPeopleAsync();
+            var freeSpaces = maxSpaces - parkedPersons.Count;
+            return freeSpaces;
+        }
         public async Task<bool> IsPersonParked(string name)
         {
             var parkedPeople = await _personDataAccess.GetListOfPeopleAsync();
             return parkedPeople.Exists(x => x.Name == name);
         }
 
-        public async Task PersonAndVehicleLeaving(Person person) 
+        public async Task PersonAndVehicleLeaving(Person person)
         {
-            var vehicle = person.Vehicle;
-            await _vehicleDataAccess.DeleteStarshipAsync(vehicle);
+            await _vehicleDataAccess.DeleteStarshipAsync(person.Vehicle);
             await _personDataAccess.DeletePersonAsync(person);
-            // Ska det vara en SaveChanges här??
+            await _parkingHouseContext.SaveChangesAsync();
         }
 
         // TODO Generera en faktura $$$

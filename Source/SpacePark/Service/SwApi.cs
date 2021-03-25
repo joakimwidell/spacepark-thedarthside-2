@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SpacePark
 {
-    public class SwApi : Menu, IDisposable
+    public class SwApi : IDisposable
     {
         public string Name { get; set; }
         private string NamePath { get; set; }
@@ -54,6 +54,7 @@ namespace SpacePark
         {
             NamePath = $"https://swapi.dev/api/people/?search={name}";
             var search = await GetStarWarsObject<SearchResultTraveller>(NamePath);
+         
             try
             {
                 if (search.results[0].Name.ToLower() == name.ToLower())
@@ -69,7 +70,8 @@ namespace SpacePark
             catch (Exception)
             {
                 // TODO Hantera här!!
-                Console.WriteLine("You are not famous and can't access this spacapark.");
+                Console.WriteLine("You are not famous and can't access this spacepark.");
+                await Task.Delay(2000);
             };
 
             return null;
@@ -77,15 +79,14 @@ namespace SpacePark
 
         public async Task<string> ChooseStarShip(SpaceTraveller person)
         {
-            if (!person.StarShips.Any() )
-            {
-                Console.WriteLine("You don't have a spaceship to park. Next, please!");
-                return "";
-            }
-
             var menu = new Menu();
             List<string> starShips = new();
-            
+            if (!person.StarShips.Any())
+            {
+                Console.WriteLine("You don't have a spaceship to park. Next, please!");
+                await Task.Delay(2000);
+                return null;
+            }
             foreach (var starShip in person.StarShips)
             {
                 var search = await GetStarWarsObject<Starship>(starShip);
