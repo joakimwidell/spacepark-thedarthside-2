@@ -50,9 +50,9 @@ namespace SpacePark
             await _Context.SaveChangesAsync();
         }
 
-        public Person CreatePerson(SpaceTraveller spaceTraveller, string starShip)
+        public Person CreatePerson(SpaceTraveller spaceTraveller, string starShip, double shipLength)
         {
-            return new Person(spaceTraveller.Name, new Vehicle(starShip));
+            return new Person(spaceTraveller.Name, new Vehicle(starShip, shipLength));
         }
     }
 }

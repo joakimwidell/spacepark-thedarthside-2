@@ -8,12 +8,13 @@ namespace SpacePark
     {
         static async Task Main(string[] args)
         {
-      
             var context = new Context();
             var vehicleDataAccess = new VehicleDataAccess(context);
             var personDataAccess = new PersonDataAccess(context);
             var parkingHouseDataAccess = new ParkingHouseDataAccess(context, vehicleDataAccess, personDataAccess);
-            var spacePark = new SpacePark(context, vehicleDataAccess,personDataAccess, parkingHouseDataAccess);
+            var spacePark = new SpacePark(context, vehicleDataAccess, personDataAccess, parkingHouseDataAccess);
+
+
             await spacePark.Start();
 
             //// Tömmer databasen på personer
@@ -31,7 +32,6 @@ namespace SpacePark
             //    context.Remove(item);
             //    context.SaveChanges();
             //}
-
         }
     }
 }

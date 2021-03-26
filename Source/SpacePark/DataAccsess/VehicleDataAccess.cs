@@ -17,10 +17,8 @@ namespace SpacePark
 
         public async Task AddStarShipAsync(Vehicle starShip)
         {
-
             await _Context.AddAsync<Vehicle>(starShip);
             await _Context.SaveChangesAsync();
-
         }
 
         public async Task<List<Vehicle>> GetListOfStarShipsAsync()
@@ -33,5 +31,15 @@ namespace SpacePark
             _Context.Remove(starShip);
             await _Context.SaveChangesAsync();
         }
+
+        //public async Task<int> GetLengthOfShipAsync(Person person)
+        //{
+
+        //}
+
+        //public async Task<int> CountUsedSpaces()
+        //{
+        //    return await _Context.Vehicle.
+        //}
     }
 }

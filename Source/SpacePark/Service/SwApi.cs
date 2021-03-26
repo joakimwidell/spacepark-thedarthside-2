@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SpacePark.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace SpacePark
         private string NamePath { get; set; }
         public string ShipName { get; set; }
         public string ShipPath { get; set; }
+       // public double ShipLength { get; set; }
 
         readonly HttpClient Client = new();
 
@@ -87,6 +89,7 @@ namespace SpacePark
                 await Task.Delay(2000);
                 return null;
             }
+
             foreach (var starShip in person.StarShips)
             {
                 var search = await GetStarWarsObject<Starship>(starShip);
@@ -96,6 +99,15 @@ namespace SpacePark
             int starShipIndex = menu.ShowMenu("Choose Starship to park: ", starShips);
 
             return starShips[starShipIndex];
+        }
+
+        public async Task<double> GetShipLength(string path)
+        {
+            ShipPath = $"https://swapi.dev/api/starships/?search={path}";
+
+            var starShip = await GetStarWarsObject<SearchResultStarShip>(ShipPath);
+            
+            return double.Parse(starShip.results[0].length.Replace('.',','));
         }
 
         public void Dispose()

@@ -12,7 +12,7 @@ namespace SpacePark
         private readonly Context _parkingHouseContext = new Context();
         private readonly PersonDataAccess _personDataAccess;
         private readonly VehicleDataAccess _vehicleDataAccess;
-        private readonly int maxSpaces = 4;
+        private readonly int maxSpaces = 50;
 
         public ParkingHouseDataAccess(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
         {
@@ -34,10 +34,22 @@ namespace SpacePark
 
         public async Task<int> ShowFreeSpaces()
         {
-            var parkedPersons = await _personDataAccess.GetListOfPeopleAsync();
-            var freeSpaces = maxSpaces - parkedPersons.Count;
-            return freeSpaces;
+            int occupiedSpaces = 0;
+            var spaceships = await _vehicleDataAccess.GetListOfStarShipsAsync();
+
+            if (spaceships != null)
+                foreach (var s in spaceships)
+                {
+                    if (s.ShipLength > 1000)
+                        occupiedSpaces += 10;
+                    else if (s.ShipLength > 30)
+                        occupiedSpaces += 3;
+                    else if (s.ShipLength < 30)
+                        occupiedSpaces++;
+                }
+            return maxSpaces - occupiedSpaces;
         }
+
         public async Task<bool> IsPersonParked(string name)
         {
             var parkedPeople = await _personDataAccess.GetListOfPeopleAsync();
@@ -50,8 +62,6 @@ namespace SpacePark
             await _personDataAccess.DeletePersonAsync(person);
             await _parkingHouseContext.SaveChangesAsync();
         }
-
-        // TODO Generera en faktura $$$
     }
 }
 

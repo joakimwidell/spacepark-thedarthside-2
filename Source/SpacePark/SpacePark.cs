@@ -90,7 +90,9 @@ namespace SpacePark
             if (spacemansStarship == null)
                 await Start();
 
-            var famousSpaceTraveller = _personDataAccess.CreatePerson(spaceMan, spacemansStarship);
+            var starShipLength = await _swApi.GetShipLength(spacemansStarship);
+
+            var famousSpaceTraveller = _personDataAccess.CreatePerson(spaceMan, spacemansStarship, starShipLength);
             await _personDataAccess.AddPersonAsync(famousSpaceTraveller);
             Console.WriteLine("Your spaceship have been parked...");
             await Task.Delay(2000);

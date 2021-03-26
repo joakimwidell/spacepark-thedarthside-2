@@ -11,18 +11,19 @@ namespace SpacePark
         public int Id { get; set; }
         public string StarShipModel { get; set; }
         public DateTime Arrival { get; set; }
+        public double ShipLength { get; set; }
+
         public Vehicle()
         {
 
         }
-        public Vehicle(string name)
+
+        public Vehicle(string starShipModel, double shipLength)
         {
-            StarShipModel = name;
+            StarShipModel = starShipModel;
+            ShipLength = shipLength;
             this.Arrival = DateTime.Now;
         }
-
-
     }
-
 }
 
