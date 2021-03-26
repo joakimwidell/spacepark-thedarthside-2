@@ -4,16 +4,13 @@ using System.Threading.Tasks;
 
 namespace SpacePark
 {
-    public class VehicleDataAccess 
+    public class VehicleDataAccess : IVehicleDataAccess
     {
-        private readonly Context _Context = new Context();
+        private readonly Context _Context = new();
 
 
         // TODO Depature (TimeSpan) Arrival * Pris = Kostnad när man lämnar
-        public VehicleDataAccess(Context context)
-        {
-            _Context = context;
-        }
+       
 
         public async Task AddStarShipAsync(Vehicle starShip)
         {

@@ -9,12 +9,9 @@ namespace SpacePark
 {
     public class PersonDataAccess
     {
-        private readonly Context _Context;
+        private readonly Context _Context = new();
 
-        public PersonDataAccess(Context context)
-        {
-            _Context = context;
-        }
+    
 
         public async Task<Person> GetPersonByid(int id)
         {

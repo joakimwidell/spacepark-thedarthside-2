@@ -9,27 +9,22 @@ namespace SpacePark
 {
     public class ParkingHouseDataAccess
     {
-        private readonly Context _parkingHouseContext = new Context();
-        private readonly PersonDataAccess _personDataAccess;
-        private readonly VehicleDataAccess _vehicleDataAccess;
+        private readonly Context _parkingHouseContext = new();
+        private readonly PersonDataAccess _personDataAccess = new();
+        private readonly VehicleDataAccess _vehicleDataAccess = new();
         private readonly int maxSpaces = 50;
 
-        public ParkingHouseDataAccess(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess)
-        {
-            _parkingHouseContext = context;
-            _vehicleDataAccess = vehicleDataAccess;
-            _personDataAccess = personDataAccess;
-        }
+      
         public double TimeParked(Vehicle vehicle)
         {
             DateTime start = (DateTime)vehicle.Arrival;
             DateTime end = DateTime.Now;
-            return (end - start).TotalMinutes;
+            return (end - start).TotalMinutes * vehicle.ShipLength;
         }
 
         public double CostOfParking(double timeParked)
         {
-            return Math.Round(timeParked, 0) * 250;
+            return Math.Round(timeParked, 0) * 250 ;
         }
 
         public async Task<int> ShowFreeSpaces()

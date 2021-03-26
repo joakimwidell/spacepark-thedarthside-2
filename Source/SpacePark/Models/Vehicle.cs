@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SpacePark
 {
-    public class Vehicle
+    public class Vehicle : IVehicle
     {
         [Key]
         public int Id { get; set; }

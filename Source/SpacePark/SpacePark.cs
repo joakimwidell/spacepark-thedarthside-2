@@ -8,19 +8,12 @@ namespace SpacePark
 {
     public class SpacePark : ParkingHouseDataAccess
     {
-        private readonly Context _Context;
+
         private readonly SwApi _swApi = new();
-        private readonly VehicleDataAccess _vehicelDataAccess;
-        private readonly PersonDataAccess _personDataAccess;
-        private readonly ParkingHouseDataAccess _parkingHouseDataAccess;
+        private readonly PersonDataAccess _personDataAccess = new();
+        private readonly ParkingHouseDataAccess _parkingHouseDataAccess = new();
         private int select;
-        public SpacePark(Context context, VehicleDataAccess vehicleDataAccess, PersonDataAccess personDataAccess, ParkingHouseDataAccess parkingHouseDataAccess) : base(context, vehicleDataAccess, personDataAccess)
-        {
-            _Context = context;
-            _vehicelDataAccess = vehicleDataAccess;
-            _personDataAccess = personDataAccess;
-            _parkingHouseDataAccess = parkingHouseDataAccess;
-        }
+   
 
         public async Task Start()
         {
