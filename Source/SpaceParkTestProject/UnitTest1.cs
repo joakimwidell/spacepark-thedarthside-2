@@ -18,6 +18,17 @@ namespace SpaceParkTestProject
         }
 
         [Fact]
+        public void CostOfParking_Argument_Zero_Expected_Zero()
+        {
+            var hej = new ParkingHouseDataAccess();
+            var result = hej.CostOfParking(0);
+
+            Assert.Equal(0, result);
+        }
+
+        // Något parkingtest till
+
+        [Fact]
         public async Task Get_Lengt_Of_StarShip()
         {
             var swApi = new SwApi();
@@ -25,6 +36,9 @@ namespace SpaceParkTestProject
 
             Assert.Equal(12.5, result);
         }
+
+        // Test ++
+
         [Fact]
         public async Task Get_Startravellers_Starships()
         {
@@ -36,5 +50,7 @@ namespace SpaceParkTestProject
             Assert.Equal(listOfShips, result.StarShips);
             Assert.NotNull(result);
         }
+
+        // Test ++
     }
 }
