@@ -38,8 +38,8 @@ namespace SpacePark
                     }
                     else
                     {
-                        // TODO! Skriv ett bättre svar. Retry?
-                        Console.WriteLine("Data is null!");
+                       
+                        Console.WriteLine("Error fetching data!");
                     }
                 }
             }
@@ -65,7 +65,7 @@ namespace SpacePark
                 }
                 else
                 {
-                    // TODO Hantera här!!
+                    
                     Console.WriteLine("You have entered an invalid name, please enter your full name.");
                 }
             }

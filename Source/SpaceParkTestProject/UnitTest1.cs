@@ -36,7 +36,7 @@ namespace SpaceParkTestProject
         }
 
         [Fact]
-        public async Task Get_Lengt_Of_StarShip()
+        public async Task GetShipLength_Expect_Length()
         {
             var swApi = new SwApi();
             var result = await swApi.GetShipLength("x-wing");
@@ -44,10 +44,8 @@ namespace SpaceParkTestProject
             Assert.Equal(12.5, result);
         }
 
-        // Test ++
-
         [Fact]
-        public async Task Get_Startravellers_Starships()
+        public async Task GetSpaceTraveller_Expect_Starships()
         {
             var swApi = new SwApi();
             var listOfShips = new List<string>
@@ -58,6 +56,21 @@ namespace SpaceParkTestProject
             Assert.NotNull(result);
         }
 
-        // Test ++
+        [Fact]
+        public async Task GetSpaceTraveller_InvalidName_Expect_Exception_Message()
+        {
+            var swApi = new SwApi();
+            var result = await swApi.GetSpaceTraveller("Luko skywalker");
+            Assert.NotNull("You are not famous and can't access this spacepark.");
+        }
+
+        [Fact]
+        public async Task GetSpaceTraveller_EmptyInput_Expect_Exception_Message()
+        {
+            var swApi = new SwApi();
+            var result = await swApi.GetSpaceTraveller("");
+            Assert.NotNull("You have entered an invalid name, please enter your full name.");
+        }
+
     }
 }

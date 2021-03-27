@@ -49,7 +49,7 @@ namespace SpacePark
                     case 0:
                         if (await _parkingHouseDataAccess.IsPersonParked(starTraveler))
                         {
-                            Console.WriteLine("Dude, you are already here, are you stupid?!");
+                            Console.WriteLine("You are already parked here, are you stupid?!");
                             await Task.Delay(2000);
                             break;
                         }
@@ -64,7 +64,7 @@ namespace SpacePark
                         }
                         await LeaveParkingHouse(starTraveler);
                         await Task.Delay(1000);
-                        Console.WriteLine("Invoice sent to space-mail...");
+                        Console.WriteLine("Invoice sent to your space-mail...");
                         await Task.Delay(2000);
                         Console.Clear();
                         break;
@@ -98,7 +98,7 @@ namespace SpacePark
             double timeParked = _parkingHouseDataAccess.TimeParked(personLeaving.Vehicle);
             double costOfParking = _parkingHouseDataAccess.CostOfParking(timeParked);
             await Task.Delay(1000);
-            Console.WriteLine($"The cost for you stay is ¤{costOfParking} pay and get the fuck ot of here!");
+            Console.WriteLine($"The cost for you stay is ¤{costOfParking} thank you for visiting us!");
 
             await _parkingHouseDataAccess.PersonAndVehicleLeaving(personLeaving);
         }
