@@ -72,5 +72,30 @@ namespace SpaceParkTestProject
             Assert.NotNull("You have entered an invalid name, please enter your full name.");
         }
 
+        [Fact]
+        public async Task ChooseStarShip_NoneAvailable_Expect_Null_Return()
+        {
+            var swApi = new SwApi();
+            var testPerson = await swApi.GetSpaceTraveller("C-3PO");
+            var result = await swApi.ChooseStarShip(testPerson);
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task ShowFreeSpaces_Expected_Amount()
+        {
+            var freeSpaces = new ParkingHouseDataAccess();
+            var actualAvailable = await freeSpaces.ShowFreeSpaces();
+            Assert.Equal("50", actualAvailable.ToString());
+        }
+
+        [Fact]
+        public async Task IsPersonParked_Check_()
+        {
+            var isParked = new ParkingHouseDataAccess();
+            var result = await isParked.IsPersonParked("luke skywalker");
+            Assert.True(result);
+        }
+
     }
 }
