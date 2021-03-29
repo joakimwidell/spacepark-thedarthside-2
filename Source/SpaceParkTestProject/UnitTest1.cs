@@ -81,20 +81,20 @@ namespace SpaceParkTestProject
             Assert.Null(result);
         }
 
-        [Fact]
-        public async Task ShowFreeSpaces_Expected_Empty() //Test will only pass if no vehicles are parked
-        {
-            var freeSpaces = new ParkingHouseDataAccess();
-            var actualAvailable = await freeSpaces.ShowFreeSpaces();
-            Assert.Equal("50", actualAvailable.ToString());
-        }
+        //[Fact]
+        //public async Task ShowFreeSpaces_Expected_Empty() //Test will only pass if no vehicles are parked
+        //{
+        //    var freeSpaces = new ParkingHouseDataAccess();
+        //    var actualAvailable = await freeSpaces.ShowFreeSpaces();
+        //    Assert.Equal("50", actualAvailable.ToString());
+        //}
 
-        [Fact]
-        public async Task IsPersonParked_Check() 
-        {
-            var isParked = new ParkingHouseDataAccess();
-            var result = await isParked.IsPersonParked("luke skywalker");
-            Assert.True(result);
-        }
+        //[Fact]
+        //public async Task IsPersonParked_Check() 
+        //{
+        //    var isParked = new ParkingHouseDataAccess();
+        //    var result = await isParked.IsPersonParked("luke skywalker");
+        //    Assert.True(result);
+        //}
     }
 }
