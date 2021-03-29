@@ -29,8 +29,8 @@ namespace SpaceParkTestProject
         [Fact]
         public void CostOfParking_Argument_Double_Expect_No_Fractional_Digits()
         {
-            var hej = new ParkingHouseDataAccess();
-            var result = hej.CostOfParking(25.897);
+            var parkingHouse = new ParkingHouseDataAccess();
+            var result = parkingHouse.CostOfParking(25.897);
 
             Assert.Equal(6500, result);
         }
