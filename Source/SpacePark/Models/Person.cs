@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SpacePark
 {
-    public class Person : IPerson
+    public class Person
     {
         [Key]
         public int Id { get; set; }
