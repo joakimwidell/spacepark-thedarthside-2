@@ -12,7 +12,6 @@ namespace SpacePark
         private readonly Context _Context = new();
 
     
-
         public async Task<Person> GetPersonByid(int id)
         {
             return await _Context.Person.FirstOrDefaultAsync(x => x.Id == id);

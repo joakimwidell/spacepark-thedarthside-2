@@ -11,6 +11,7 @@ namespace SpacePark
 
         private readonly SwApi _swApi = new();
         private readonly PersonDataAccess _personDataAccess = new();
+        private readonly VehicleDataAccess _vehicleDataAccess = new();
         private readonly ParkingHouseDataAccess _parkingHouseDataAccess = new();
         private int select;
    
@@ -99,8 +100,8 @@ namespace SpacePark
             double costOfParking = _parkingHouseDataAccess.CostOfParking(timeParked);
             await Task.Delay(1000);
             Console.WriteLine($"The cost for you stay is ¤{costOfParking} thank you for visiting us!");
-
-            await _parkingHouseDataAccess.PersonAndVehicleLeaving(personLeaving);
+            await _personDataAccess.DeletePersonAsync(personLeaving);
+            await _vehicleDataAccess.DeleteStarshipAsync(personLeaving.Vehicle);
         }
     }
 }

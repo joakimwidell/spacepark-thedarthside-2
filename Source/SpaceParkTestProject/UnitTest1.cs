@@ -11,8 +11,8 @@ namespace SpaceParkTestProject
         [Fact]
         public void CostOfParking_Expected_Cost()
         {
-            var hej = new ParkingHouseDataAccess();
-            var result = hej.CostOfParking(37);
+            var parkingHouse = new ParkingHouseDataAccess();
+            var result = parkingHouse.CostOfParking(37);
 
             Assert.Equal(9250, result);
         }
@@ -20,8 +20,8 @@ namespace SpaceParkTestProject
         [Fact]
         public void CostOfParking_Argument_Zero_Expected_Zero()
         {
-            var hej = new ParkingHouseDataAccess();
-            var result = hej.CostOfParking(0);
+            var perkingHouse = new ParkingHouseDataAccess();
+            var result = perkingHouse.CostOfParking(0);
 
             Assert.Equal(0, result);
         }
