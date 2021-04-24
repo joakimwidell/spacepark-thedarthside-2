@@ -21,8 +21,10 @@ namespace SpacePark
         {
 
             var builder = new ConfigurationBuilder();
+            //builder.SetBasePath(@"Data Source=(local)\SQLExpress01;Initial Catalog=SpacePark;Integrated Security=SSPI;");
 
-            builder.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            builder.AddJsonFile("appsettings.json"); //ORIGINAL
+
             var config = builder.Build();
             var defaultConnectionString = config.GetConnectionString("Default");
             optionsBuilder.UseSqlServer(defaultConnectionString);

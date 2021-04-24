@@ -1,0 +1,15 @@
+﻿version: '3'
+services:
+  log-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+      - "41433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Shitstr0ng!"
+    volumes:
+      - SpaceParkData:/var/opt/mssql
+    container_name: SpaceParkData
+volumes:
+  SpaceParkData:
+    driver: local

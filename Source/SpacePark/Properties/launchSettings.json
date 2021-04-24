@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SpacePark": {
+      "commandName": "Project"
+    },
+    "Docker (1)": {
+      "commandName": "Docker"
+    }
+  }
+}
