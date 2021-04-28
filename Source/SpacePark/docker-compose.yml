@@ -1,5 +1,10 @@
 ﻿version: '3'
 services:
+  SpacePark:
+    image: 584b64141c41  
+    build:
+        context: .
+        dockerfile: Dockerfile
   log-server:
     image: mcr.microsoft.com/mssql/server:2017-latest
     ports:
