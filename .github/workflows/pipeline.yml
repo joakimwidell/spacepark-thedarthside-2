@@ -2,7 +2,6 @@ on: [push]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
-    env: source/spacepark.sln
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
@@ -10,3 +9,4 @@ jobs:
           dotnet-version: 5.0.x
       - name: Bygg koden
         run: dotnet build
+        - environment: "C:\Users\Joaki\Documents\GitHub\spacepark-thedarthside-2-pipe\Source"
