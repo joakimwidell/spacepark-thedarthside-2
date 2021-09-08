@@ -9,4 +9,4 @@ jobs:
           dotnet-version: 5.0.x
       - name: Bygg koden
         run: dotnet build
-        - environment: "C:\Users\Joaki\Documents\GitHub\spacepark-thedarthside-2-pipe\Source"
+        - environment: "Source/spacepark.sln"
