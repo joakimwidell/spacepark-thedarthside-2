@@ -8,5 +8,5 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Bygg koden
-        run: dotnet build
-        - environment: "Source/spacepark.sln"
+        run: dotnet build/"Source"
+        
